@@ -1,7 +1,7 @@
 {
   "name": "fh-logger",
   "description": "Enables a simple way of configuring and creating loggers, configured with request serializers, including clustering information.",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/feedhenry/fh-logger.git"
