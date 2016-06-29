@@ -15,7 +15,6 @@
  limitations under the License.
 */
 var expect = require('chai').expect;
-var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var requestIdMiddleware = require('../lib/request-id/middleware');
 var cls = require('continuation-local-storage');
