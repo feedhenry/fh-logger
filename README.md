@@ -71,6 +71,7 @@ app.get('/', function(req, res) {
   console.log(req.requestId); // uuid
   console.log(logger.requestId); // uuid
   logger.info('some message'); // -> {msg: 'some message', requestId: 'some-uuid'}
+  logger.info(logger.requestIdHeader) // -> {msg: 'X-SOME-HTTP-HEADER', requestId: 'some-uuid'}
 })
 ```
 
