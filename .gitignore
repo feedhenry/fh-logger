@@ -15,3 +15,4 @@ plato/
 coverage/
 *.swp
 cov-*
+.idea/

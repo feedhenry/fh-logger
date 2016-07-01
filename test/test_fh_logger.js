@@ -92,6 +92,9 @@ describe('fh_logger', function() {
       it('path should be '  + logFile, function() {
         expect(logger.streams[0].path).to.equal(logFile);
       });
+      after(function(done) {
+        fs.unlink(logFile, done);
+      });
     });
 
     describe('using file type from string configuration', function() {
