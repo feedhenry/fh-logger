@@ -15,6 +15,7 @@
  limitations under the License.
 */
 var expect = require('chai').expect;
+var sinon = require('sinon');
 var EventEmitter = require('events').EventEmitter;
 var requestIdMiddleware = require('../lib/request-id/middleware');
 var cls = require('continuation-local-storage');
@@ -27,9 +28,11 @@ describe('request-id middleware', function() {
     requestIdHeader: customHeader
   };
 
+  var mockReqId = 'some-uuid';
+
   var mockReq = new EventEmitter();
   mockReq.header = function() {
-    return 'some-uuid';
+    return mockReqId;
   };
 
   before(function() {
@@ -39,10 +42,22 @@ describe('request-id middleware', function() {
     expect(this.middleware.header).to.equal(customHeader);
   });
   it('should populate the request id', function(done) {
-    this.middleware(mockReq, new EventEmitter(), function next() {
+    var setHeaderSpy = sinon.spy();
+
+    var mockRes = {
+      set: setHeaderSpy
+    };
+
+
+    this.middleware(mockReq, mockRes, function next() {
       var ns = cls.getNamespace(namespace);
-      expect(ns.get('requestId')).to.equal('some-uuid');
-      expect(logger.createLogger({name: 'test'}).getRequestId()).to.equal('some-uuid');
+      expect(ns.get('requestId')).to.equal(mockReqId);
+      expect(logger.createLogger({name: 'test'}).getRequestId()).to.equal(mockReqId);
+
+      //The response headers should have been set.
+      sinon.assert.calledOnce(setHeaderSpy);
+      sinon.assert.calledWith(setHeaderSpy, sinon.match(customHeader), sinon.match(mockReqId));
+
       done();
     });
   });
