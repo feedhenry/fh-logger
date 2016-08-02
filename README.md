@@ -1,4 +1,10 @@
 ## fh-logger
+
+[![npm package](https://nodei.co/npm/fh-logger.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/fh-logger/)
+
+[![Dependency Status](https://img.shields.io/david/feedhenry/fh-logger.svg?style=flat-square)](https://david-dm.org/feedhenry/fh-logger)
+[![Known Vulnerabilities](https://snyk.io/test/npm/fh-logger/badge.svg?style=flat-square)](https://snyk.io/test/npm/fh-logger)
+
 Enables a simple way of configuring and creating [Bunyan](https://github.com/trentm/node-bunyan) loggers, configured with request serializers, including clustering information. 
 
 ### Install
