@@ -61,4 +61,31 @@ describe('request-id middleware', function() {
       done();
     });
   });
+
+  it('should populate the request id for connect middleware', function(done) {
+    var setHeaderSpy = sinon.spy();
+
+    var mockReq = new EventEmitter();
+    var mockReqIdLc = "somelowercase";
+
+    mockReq.headers = {
+      'x-custom-request-id': mockReqIdLc
+    };
+    var mockRes = {
+      setHeader: setHeaderSpy
+    };
+
+
+    this.middleware(mockReq, mockRes, function next() {
+      var ns = cls.getNamespace(namespace);
+      expect(ns.get('requestId')).to.equal(mockReqIdLc);
+      expect(logger.createLogger({name: 'test'}).getRequestId()).to.equal(mockReqIdLc);
+
+      //The response headers should have been set.
+      sinon.assert.calledOnce(setHeaderSpy);
+      sinon.assert.calledWith(setHeaderSpy, sinon.match(customHeader), sinon.match(mockReqIdLc));
+
+      done();
+    });
+  });
 });
