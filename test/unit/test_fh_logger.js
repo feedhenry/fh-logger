@@ -15,9 +15,9 @@
  limitations under the License.
 */
 var rewire = require('rewire');
-var fh_logger = rewire('../lib/fh_logger.js');
-var expect = require('chai').expect
-var bunyan = require('bunyan'); 
+var fh_logger = rewire('../../lib/fh_logger.js');
+var expect = require('chai').expect;
+var bunyan = require('bunyan');
 var fs = require('fs');
 
 describe('fh_logger', function() {
@@ -48,7 +48,7 @@ describe('fh_logger', function() {
 
     describe('with Bunyan defaults', function() {
       var logger;
-      before(function(){
+      before(function() {
         logger = fh_logger.createLogger({name: 'simple'});
       });
       it('name should have been set to simple', function() {
@@ -71,7 +71,7 @@ describe('fh_logger', function() {
     describe('using file type', function() {
       var logFile = './test/test_fh_logger.log';
       var logger;
-      before(function(){
+      before(function() {
         var config = {name: 'file_logger', streams: [
           {type: 'file', stream: 'file', path: logFile, level: 'info'}
         ]};
@@ -100,7 +100,7 @@ describe('fh_logger', function() {
     describe('using file type from string configuration', function() {
       var logFile = './test/test_fh_logger_string.log';
       var logger;
-      before(function(){
+      before(function() {
         var config = JSON.stringify({name: 'file_logger_string', streams: [
           {type: 'file', stream: 'file', path: logFile, level: 'debug'}
         ]});
@@ -133,7 +133,7 @@ describe('fh_logger', function() {
 
     describe('using process.stdout from string configuration', function() {
       var logger;
-      before(function(){
+      before(function() {
         var config = JSON.stringify({name: 'from_string_stdout', streams: [
           {type: 'stream', stream: 'process.stdout', level: 'debug'}
         ]});
@@ -158,7 +158,7 @@ describe('fh_logger', function() {
 
     describe('using raw ringbuffer.stdout from string configuration', function() {
       var logger;
-      before(function(){
+      before(function() {
         var config = JSON.stringify({name: 'from_string_raw', streams: [
           {type: 'raw', stream: 'ringbuffer', level: 'trace'}
         ]});
@@ -186,7 +186,7 @@ describe('fh_logger', function() {
 
     describe('using raw ringbuffer.stdout from string configuration', function() {
       var logger;
-      before(function(){
+      before(function() {
         var config = JSON.stringify({name: 'test_stderr', streams: [{
           stream: 'process.stderr', type: 'stream'}
         ]});
@@ -211,7 +211,7 @@ describe('fh_logger', function() {
 
     describe('from ./test/config.json', function() {
       var logger;
-      before(function(){
+      before(function() {
         var config = fs.readFileSync(__dirname + '/config.json').toString();
         logger = fh_logger.createLogger(config);
       });
@@ -261,7 +261,7 @@ describe('fh_logger', function() {
 
   describe('createStreams', function() {
     var createStreams;
-    before(function(){
+    before(function() {
       createStreams = fh_logger.__get__("createStreams");
     });
     it('no configured streams should be alright, Will default to Bunyan defaults', function() {
@@ -295,8 +295,8 @@ describe('fh_logger', function() {
 
   describe('default requestSerializer', function() {
     var requestSerializer;
-    before(function(){
-       requestSerializer = fh_logger.__get__("requestSerializer");
+    before(function() {
+      requestSerializer = fh_logger.__get__("requestSerializer");
     });
     it("should have reqId property included in logging requests", function() {
       expect(requestSerializer.reqId).to.be.defined;
@@ -314,8 +314,8 @@ describe('fh_logger', function() {
 
   describe('createSerializers', function() {
     var createSerializers;
-    before(function(){
-       createSerializers = fh_logger.__get__("createSerializers");
+    before(function() {
+      createSerializers = fh_logger.__get__("createSerializers");
     });
     it("with no configured serializers should return default request serializer", function() {
       expect(createSerializers({}).req).to.be.defined;
@@ -326,8 +326,8 @@ describe('fh_logger', function() {
     });
     it("with configured request serrializer", function() {
       var config = { serializers : {
-          req : function(r) { return { dummy: 'testing'}; }
-        }
+        req : function(r) { return { dummy: 'testing'}; }
+      }
       };
       var serializers = createSerializers(config);
       expect(serializers.req).to.be.defined;
@@ -335,8 +335,8 @@ describe('fh_logger', function() {
     });
     it("with configured response serrializer", function() {
       var config = { serializers : {
-          res : function(r) { return { dummy: 'testing'}; }
-        }
+        res : function(r) { return { dummy: 'testing'}; }
+      }
       };
       var serializers = createSerializers(config);
       expect(serializers.res).to.be.defined;
@@ -346,8 +346,8 @@ describe('fh_logger', function() {
 
   describe('parseConfig', function() {
     var parseConfig;
-    before(function(){
-       parseConfig = fh_logger.__get__("parseConfig");
+    before(function() {
+      parseConfig = fh_logger.__get__("parseConfig");
     });
     it("string config should be parsed to JSON", function() {
       var config = parseConfig('{"name": "testing"}');
@@ -368,5 +368,5 @@ var deleteFile = function(file) {
       });
     }
   });
-}
+};
 

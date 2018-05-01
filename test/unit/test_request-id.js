@@ -17,10 +17,10 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var EventEmitter = require('events').EventEmitter;
-var requestIdMiddleware = require('../lib/request-id/middleware');
+var requestIdMiddleware = require('../../lib/request-id/middleware');
 var cls = require('continuation-local-storage');
-var namespace = require('../lib/const').namespace;
-var logger = require('../lib/fh_logger');
+var namespace = require('../../lib/const').namespace;
+var logger = require('../../lib/fh_logger');
 
 describe('request-id middleware', function() {
   var customHeader = 'X-CUSTOM-REQUEST-ID';
