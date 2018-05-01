@@ -1,6 +1,6 @@
 {
   "name": "fh-logger",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "dependencies": {
     "bunyan": {
       "version": "1.8.1",
