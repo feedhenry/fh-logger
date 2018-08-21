@@ -17,7 +17,7 @@
 var rewire = require('rewire');
 var fh_logger = rewire('../../lib/fh_logger.js');
 var expect = require('chai').expect;
-var bunyan = require('bunyan');
+var bunyan = require('bunyan-lite');
 var fs = require('fs');
 
 describe('fh_logger', function() {
