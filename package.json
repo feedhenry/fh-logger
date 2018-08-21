@@ -1,7 +1,7 @@
 {
   "name": "fh-logger",
   "description": "Enables a simple way of configuring and creating loggers, configured with request serializers, including clustering information.",
-  "version": "0.5.5",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/feedhenry/fh-logger.git"
@@ -17,7 +17,7 @@
     "version": "sed -i.bak \"s/sonar.projectVersion=.*/sonar.projectVersion=${npm_package_version}/\" sonar-project.properties && rm sonar-project.properties.bak && git add sonar-project.properties"
   },
   "dependencies": {
-    "bunyan": "^1.5.1",
+    "bunyan-lite": "^1.0.1",
     "continuation-local-storage": "^3.1.7",
     "node-uuid": "^1.4.7"
   },
